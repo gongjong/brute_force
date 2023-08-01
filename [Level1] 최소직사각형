@@ -1,0 +1,10 @@
+#try1 -> solve
+# 긴걸 높이 짧은걸 넓이로 해서 계산함
+
+def solution(sizes):
+    max_h, max_w = 0, 0
+    for a, b in sizes: 
+        h, w = max(a, b), min(a, b)
+        max_h = max(h, max_h)
+        max_w = max(w, max_w)
+    return max_h*max_w
