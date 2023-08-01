@@ -8,3 +8,10 @@ def solution(sizes):
         max_h = max(h, max_h)
         max_w = max(w, max_w)
     return max_h*max_w
+
+
+# 다른 사람 풀이
+#로직은 비슷하지만 깔끔하게 만들어서 참고함
+
+def solution(sizes):
+    return max(max(x) for x in sizes) * max(min(x) for x in sizes)
