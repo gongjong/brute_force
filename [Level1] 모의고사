@@ -1,0 +1,23 @@
+#try1 -> solve
+
+def solution(answers):
+    loser1 = [1,2,3,4,5]
+    loser2 = [2,1,2,3,2,4,2,5]
+    loser3 = [3,3,1,1,2,2,4,4,5,5]
+    score = [0, 0, 0]
+    result = []
+
+    for idx, answer in enumerate(answers):
+        if answer == loser1[idx%len(loser1)]:
+            score[0] += 1
+        if answer == loser2[idx%len(loser2)]:
+            score[1] += 1
+        if answer == loser3[idx%len(loser3)]:
+            score[2] += 1
+
+    
+    for idx, s in enumerate(score):
+        if s == max(score):
+            result.append(idx+1)
+
+    return result
