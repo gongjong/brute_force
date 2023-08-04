@@ -1,0 +1,22 @@
+#try 1 -> solve
+# 전역변수를 사용해서 풀었다.
+
+
+answer = 0
+
+def DFS(k, cnt, d, visit):
+    global answer
+    answer = max(cnt, answer)
+    
+    for i in range(len(d)):
+        need, use = d[i]
+        if visit[i] != True and k >= need:
+            visit[i] = True
+            DFS(k-use, cnt+1, d, visit)
+            visit[i] = False
+        
+
+def solution(k, dungeons):
+    visit = [False] * len(dungeons)
+    DFS(k, 0, dungeons, visit)
+    return answer
