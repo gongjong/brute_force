@@ -1,0 +1,41 @@
+# try 1 -> solve
+# 다른 Repository에서는 DFS로 풀었는데 여기서는 BFS로 풀었다.
+
+from collections import deque
+
+def BFS(start, tree, disconnect, visit):
+    answer = 1
+    
+    q = deque()
+    q.append(start)
+    visit[start] = True
+    
+    while q:
+        node = q.popleft()
+        for n in tree[node]:
+            if disconnect[node][n] != True and visit[n] != True:
+                visit[n] = True
+                q.append(n)
+                answer += 1
+    return answer
+
+def solution(n, wires):
+    answer = float('inf')
+    tree = [[] for _ in range(n+1)]
+    disconnect = [[False]*(n+1) for _ in range(n+1)]
+    
+    for x, y in wires:
+        tree[x].append(y)
+        tree[y].append(x)
+    
+    for x, y in wires:
+        visit = [False] * (n+1)
+        
+        disconnect[x][y] = True
+        gap1 = BFS(x, tree, disconnect, visit)
+        gap2 = BFS(y, tree, disconnect, visit)
+        disconnect[x][y] = False
+        
+        answer = min(abs(gap1-gap2), answer)
+    
+    return answer
